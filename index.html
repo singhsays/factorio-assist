@@ -2,10 +2,15 @@
 <html>
   <head>
     <title>factorio-assist</title>
+    <!-- build:css -->
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="data/v0.11.22/sprites.css">
+    <!-- endbuild -->
+    <!-- build:js -->
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>System.import('./app/app');</script>
+    <!-- endbuild -->
   </head>
   <body ng-app="myApp" ng-controller="mainCtrl as m">
     <md-toolbar>
@@ -24,7 +29,7 @@
                          placeholder="search for an item">
           <md-item-template>
             <div layout="row" layout-align="start center">
-              <img ng-src="data/v0.11.22/img/{{item.shortName}}.png" class="md-avatar"/>
+              <div class="md-avatar icon-{{item.shortName}}"></div>
               <span md-highlight-text="m.searchText" md-highlight-flags="i">{{item.name}}</span>
             </div>
           </md-item-template>                           
@@ -33,15 +38,18 @@
       <section ng-if="m.selectedRecipe">
         <md-toolbar>
           <div class="md-toolbar-tools">
-            <img ng-src="data/v0.11.22/img/{{m.selectedRecipe.shortName}}.png">
+            <div class="icon-{{m.selectedRecipe.shortName}}"></div>
             <h3>{{m.selectedRecipe.name}}</h3>
             <span flex></span>
+            <md-button>
+              <md-icon md-svg-icon="md-cancel" aria-label="cancel"></md-icon>
+            </md-button>
           </div>
         </md-toolbar>
         <md-content class="md-whiteframe-z1" layout-padding>
           <md-list ng-if="false">
             <md-list-item ng-repeat="r in m.recipes">
-              <div><img ng-src="data/v0.11.22/img/{{r.shortName}}.png" class="itemIcon">{{r.name}}</div>
+              <div><div class="itemIcon icon-{{item.shortName}}"></div> {{r.name}}</div>
             </md-list-item>
           </md-list>
         </md-content>
