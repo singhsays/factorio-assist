@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>factorio-assist</title>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>System.import('./app/app');</script>
+  </head>
+  <body ng-app="myApp" ng-controller="mainCtrl as m">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1><span>Factorio Assist</span></h1>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding>
+      <section ng-if="!m.selectedRecipe">
+        <md-autocomplete md-selected-item="m.selectedRecipe"
+                         md-search-text="m.searchText"
+                         md-items="item in m.querySearch()"
+                         md-item-text="item.name"
+                         md-min-length="2"
+                         placeholder="search for an item">
+          <md-item-template>
+            <div layout="row" layout-align="start center">
+              <img ng-src="data/v0.11.22/img/{{item.shortName}}.png" class="md-avatar"/>
+              <span md-highlight-text="m.searchText" md-highlight-flags="i">{{item.name}}</span>
+            </div>
+          </md-item-template>                           
+        </md-autocomplete>
+      </section>
+      <section ng-if="m.selectedRecipe">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <img ng-src="data/v0.11.22/img/{{m.selectedRecipe.shortName}}.png">
+            <h3>{{m.selectedRecipe.name}}</h3>
+            <span flex></span>
+          </div>
+        </md-toolbar>
+        <md-content class="md-whiteframe-z1" layout-padding>
+          <md-list ng-if="false">
+            <md-list-item ng-repeat="r in m.recipes">
+              <div><img ng-src="data/v0.11.22/img/{{r.shortName}}.png" class="itemIcon">{{r.name}}</div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </section>
+    </md-content>
+  </body>
+</html>
